@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "aa0a56a0-1630-43a6-8058-c08580608afa",
+		"name": "BookingMicroservice APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45098469",
+		"_collection_link": "https://anjali-1657953.postman.co/workspace/c4ee0903-cb38-4fb5-8128-3de0b286d77c/collection/45098469-aa0a56a0-1630-43a6-8058-c08580608afa?action=share&source=collection_link&creator=45098469"
+	},
+	"item": [
+		{
+			"name": "Create booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 1,\r\n  \"vehicleId\": 2,\r\n  \"startTime\": \"2025-05-21T10:00:00\",\r\n  \"endTime\": \"2025-05-21T12:00:00\",\r\n  \"status\": \"CONFIRMED\",\r\n  \"price\": 150.0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Bookings",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get Booking by ID",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel Booking",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/bookings/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"bookings",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
