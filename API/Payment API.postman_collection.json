@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "c6963eac-32f6-4d94-8a58-c77f5330ec98",
+		"name": "Payment API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45102965"
+	},
+	"item": [
+		{
+			"name": "Process Payment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookingId\": \"1\",\r\n    \"userId\": \"1\",\r\n    \"amount\": 2.50,\r\n    \"paymentMethod\": \"credit_card\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5432/paymentdb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5432",
+					"path": [
+						"paymentdb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Payment",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
