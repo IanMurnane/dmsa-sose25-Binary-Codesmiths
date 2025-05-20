@@ -42,4 +42,8 @@ public class VehicleService {
     public void deleteVehicle(Long id) {
         repository.deleteById(id);
     }
+
+    public List<Vehicle> getAllVehicles() {
+        return repository.findAll();
+    }
 }

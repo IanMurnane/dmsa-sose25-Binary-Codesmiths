@@ -40,4 +40,10 @@ public class VehicleController {
     public List<Vehicle> getVehiclesByProvider(@PathVariable Long providerId) {
         return service.getVehiclesByProvider(providerId);
     }
+
+    // ✅ New endpoint: Get all vehicles
+    @GetMapping
+    public List<Vehicle> getAllVehicles() {
+        return service.getAllVehicles();
+    }
 }
