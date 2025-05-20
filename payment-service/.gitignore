@@ -11,8 +11,6 @@ target/
 *.iml
 *.log
 *.db
-/src/main/resources/application.properties
-/src/main/resources/application.yml
 
 ### STS ###
 .apt_generated
