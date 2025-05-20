@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "8874aa7c-8207-4b94-868f-9f91cd47904b",
+		"name": "Vehicle Management API",
+		"description": "Postman collection for Vehicle Management Microservice REST API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43478385",
+		"_collection_link": "https://ianmurnane.postman.co/workspace/Ian-Murnane's-Workspace~e10ee8e8-c8b1-4bcd-8e60-11c9f81f1c71/collection/43478385-8874aa7c-8207-4b94-868f-9f91cd47904b?action=share&source=collection_link&creator=43478385"
+	},
+	"item": [
+		{
+			"name": "Get All Vehicles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/vehicles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vehicle by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/vehicles/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vehicles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vehicles by Provider ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/vehicles/provider/101",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vehicles",
+						"provider",
+						"101"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Vehicle",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"providerId\": 1011,\n  \"type\": \"scooter1\",\n  \"model\": \"Segway Ninebot1\",\n  \"pricePerHour\": 2.51,\n  \"billingModel\": \"time-based\",\n  \"status\": \"available\",\n  \"location\": \"Düsseldorf\",\n  \"lastUpdated\": \"2025-05-20T12:00:00\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/vehicles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Vehicle",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"providerId\": 101,\n  \"type\": \"bike\",\n  \"model\": \"Yamaha MT\",\n  \"pricePerHour\": 4.0,\n  \"billingModel\": \"time-based\",\n  \"status\": \"in-use\",\n  \"location\": \"Hamburg\",\n  \"lastUpdated\": \"2025-05-20T14:00:00\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/vehicles/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vehicles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Vehicle",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/vehicles/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"vehicles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
