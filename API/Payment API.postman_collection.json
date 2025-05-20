@@ -27,14 +27,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5432/paymentdb",
+					"raw": "http://localhost:8081/payments",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5432",
+					"port": "8081",
 					"path": [
-						"paymentdb"
+						"payments"
 					]
 				}
 			},
@@ -44,7 +44,20 @@
 			"name": "Get Payment",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/payments/booking/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"payments",
+						"booking",
+						"1"
+					]
+				}
 			},
 			"response": []
 		}
