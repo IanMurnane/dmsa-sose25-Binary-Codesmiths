@@ -1,0 +1,12 @@
+server:
+  port: 8081  # Your microservice runs on port 8081
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/vehicle_management
+    username: postgres
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update  # Use "update" for dev, but "validate" for production
+    show-sql: true
