@@ -2,10 +2,12 @@ package com.mobility.vehicle_management_microservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
-public class HelloWorldApplication {
+@EnableWebMvc
+public class VehicleManagementServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(HelloWorldApplication.class, args);
+        SpringApplication.run(VehicleManagementServiceApplication.class, args);
     }
 }

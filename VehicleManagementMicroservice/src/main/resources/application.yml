@@ -1,5 +1,5 @@
 server:
-  port: 8081  # Your microservice runs on port 8081
+  port: 8081
 
 spring:
   datasource:
@@ -8,5 +8,10 @@ spring:
     password: password
   jpa:
     hibernate:
-      ddl-auto: update  # Use "update" for dev, but "validate" for production
+      ddl-auto: update
     show-sql: true
+  application:
+    name: vehicle-management-service
+  sql:
+    init:
+      mode: always
