@@ -15,7 +15,7 @@ public class PaymentController {
     }
 
     @PostMapping
-    public ResponseEntity<Payment> processPayment(@RequestBody PaymentRequest request) {
+    public ResponseEntity<Payment> processPayment(@Valid @RequestBody PaymentRequest request) {
         try {
             Payment payment = paymentService.processPayment(
                 request.getBookingId(),
@@ -25,7 +25,7 @@ public class PaymentController {
             );
             return ResponseEntity.status(201).body(payment);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().build(null);
         }
     }
 
@@ -40,9 +40,19 @@ public class PaymentController {
 }
 
 class PaymentRequest {
-    private String bookingId;
-    private String userId;
+    @NotNull
+    @JsonProperty("booking_id")
+    private Long bookingId;
+
+    @NotNul
+    @JsonProperty("user_id")
+    private Long userId;
+
+    @NotNul
     private Double amount;
+
+    @NotNul
+    @JsonProperty("payment_method")
     private String paymentMethod;
 
     public String getBookingId() { return bookingId; }

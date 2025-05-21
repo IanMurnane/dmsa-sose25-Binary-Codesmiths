@@ -15,10 +15,10 @@ public class Payment {
     private String id;
 
     @Column(name = "booking_id")
-    private String bookingId;
+    private Long bookingId;
 
     @Column(name = "user_id")
-    private String userId;
+    private Long userId;
 
     private Double amount;
 

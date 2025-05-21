@@ -1,6 +1,8 @@
 server:
   port: 8081
 spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
   application:
     name: payment-service
   datasource:

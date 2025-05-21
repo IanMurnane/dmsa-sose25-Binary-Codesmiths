@@ -18,7 +18,7 @@ public class PaymentProcessingService {
         this.bookingServiceClient = bookingServiceClient;
     }
 
-    public Payment processPayment(String bookingId, String userId, Double amount, String paymentMethod) {
+    public Payment processPayment(Long bookingId, Long userId, Double amount, String paymentMethod) {
         if (!bookingServiceClient.validateBookingId(bookingId)) {
             throw new IllegalArgumentException("Invalid booking ID");
         }
