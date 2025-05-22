@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"bookingId\": \"1\",\r\n    \"userId\": \"1\",\r\n    \"amount\": 2.50,\r\n    \"paymentMethod\": \"credit_card\"\r\n}",
+					"raw": "{\r\n    \"bookingId\": 1,\r\n    \"userId\": 1,\r\n    \"amount\": 2.50,\r\n    \"paymentMethod\": \"credit_card\",\r\n    \"billingUnit\": \"per_hour\",\r\n    \"billingRate\": 2.50\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -27,12 +27,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/payments",
+					"raw": "http://localhost:8080/payments",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8080",
 					"path": [
 						"payments"
 					]
@@ -46,20 +46,54 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/payments/booking/1",
+					"raw": "http://localhost:8080/payments/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8080",
 					"path": [
 						"payments",
-						"booking",
 						"1"
 					]
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Paypal Payment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookingId\": 2,\r\n    \"userId\": 2,\r\n    \"amount\": 12.50,\r\n    \"paymentMethod\": \"paypal\",\r\n    \"billingUnit\": \"per_hour\",\r\n    \"billingRate\": 2.50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/payments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"payments"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "bookingId",
+			"value": "1",
+			"type": "default"
 		}
 	]
 }
