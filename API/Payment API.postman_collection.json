@@ -27,12 +27,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/payments",
+					"raw": "http://localhost:8082/payments",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8082",
 					"path": [
 						"payments"
 					]
@@ -46,12 +46,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/payments/1",
+					"raw": "http://localhost:8082/payments/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8082",
 					"path": [
 						"payments",
 						"1"
@@ -75,12 +75,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/payments",
+					"raw": "http://localhost:8082/payments",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8082",
 					"path": [
 						"payments"
 					]
