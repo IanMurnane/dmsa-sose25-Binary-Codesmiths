@@ -23,9 +23,9 @@ public class UserServiceImpl implements UserService {
         }
     
      
-        if (!"User Provider".equalsIgnoreCase(userDTO.getRole())) {
-            throw new IllegalArgumentException("Role must be 'User Provider'");
-        }       
+        // if (!"User Provider".equalsIgnoreCase(userDTO.getRole())) {
+        //     throw new IllegalArgumentException("Role must be 'User Provider'");
+        // }       
 
         String role = userDTO.getRole();
         if (role == null || 
@@ -72,9 +72,9 @@ public class UserServiceImpl implements UserService {
         }
     
       
-        if (!"User Provider".equalsIgnoreCase(userDTO.getRole())) {
-            throw new IllegalArgumentException("Role must be 'User Provider'");
-        }
+        // if (!"User Provider".equalsIgnoreCase(userDTO.getRole())) {
+        //     throw new IllegalArgumentException("Role must be 'User Provider'");
+        // }
         
 
         String role = userDTO.getRole();
