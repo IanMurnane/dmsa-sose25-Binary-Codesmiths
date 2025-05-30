@@ -3,4 +3,8 @@ spring:
     import: optional:configserver:http://localhost:8888
 
   application:
-    name: vehicle-service
+    name: booking-service  
+  cloud:
+    config:
+      failFast: true
+
