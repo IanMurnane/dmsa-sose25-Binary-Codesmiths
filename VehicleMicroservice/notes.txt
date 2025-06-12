@@ -10,3 +10,5 @@ docker run --name my_pgadmin  --network postgres_network -e PGADMIN_DEFAULT_EMAI
 # pass: test123
 
 .\mvnw.cmd spring-boot:run
+mvn clean install
+mvn spring-boot:run
