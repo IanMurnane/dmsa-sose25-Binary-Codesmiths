@@ -5,6 +5,7 @@ import About from "./pages/About";
 import Users from "./pages/Users";
 import Login from "./pages/Login";
 import Payment from "./pages/Payment";
+import Booking from "./pages/Booking";
 import RequireAuth from "./Components/RequireAuth";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Link to="/about">About</Link> | 
           <Link to="/users">Users</Link> |
           <Link to="/payment">Payment</Link> |
+           <Link to="/booking">Booking</Link> |
           <button onClick={handleLogout}>Logout</button>
         </nav>
       )}
@@ -33,6 +35,7 @@ function App() {
         <Route path="/login" element={<Login onLogin={() => setIsLoggedIn(true)} />} />
         <Route path="/" element={<Home />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/booking" element={<Booking />} />
         <Route
           path="/about"
           element={
