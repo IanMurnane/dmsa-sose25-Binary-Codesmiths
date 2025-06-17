@@ -4,7 +4,7 @@ export default function Profile() {
   return (
     <div>
       <h2>Provider Profile</h2>
-      <p>Coming soon: Profile editing and password change.</p>
+      <p>This is the provider’s profile page. Edit options coming soon.</p>
     </div>
   );
 }
