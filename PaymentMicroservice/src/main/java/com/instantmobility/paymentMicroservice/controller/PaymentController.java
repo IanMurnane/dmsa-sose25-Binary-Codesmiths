@@ -5,6 +5,7 @@ import com.instantmobility.paymentMicroservice.entity.Payment;
 import com.instantmobility.paymentMicroservice.service.PaymentProcessingService;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/payments")
 public class PaymentController {
