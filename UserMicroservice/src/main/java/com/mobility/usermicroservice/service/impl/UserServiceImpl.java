@@ -21,27 +21,22 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
             throw new IllegalArgumentException("Email already exists");
         }
-    
-     
-        // if (!"User Provider".equalsIgnoreCase(userDTO.getRole())) {
-        //     throw new IllegalArgumentException("Role must be 'User Provider'");
-        // }       
 
         String role = userDTO.getRole();
-        if (role == null || 
-           (!role.equalsIgnoreCase("admin") && 
-            !role.equalsIgnoreCase("user") && 
-            !role.equalsIgnoreCase("provider"))) {
+        if (role == null ||
+                (!role.equalsIgnoreCase("admin") &&
+                        !role.equalsIgnoreCase("user") &&
+                        !role.equalsIgnoreCase("provider"))) {
             throw new RuntimeException("Role must be one of: Admin, User, Provider");
         }
 
         User user = User.builder()
                 .fullName(userDTO.getFullName())
                 .email(userDTO.getEmail())
-                .password(userDTO.getPassword())
-                .role(userDTO.getRole())
+                .password(userDTO.getPassword()) // TODO: hash it in future
+                .role(role.toLowerCase())
                 .build();
-                
+
         return userRepository.save(user);
     }
 

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { getVehicles } from "../api/apis";
+import { getVehicles, getVehicle } from "../api/apis";
 import L from "leaflet";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import scooterPng from "../assets/scooter.png"; // 👈 Your custom scooter icon
+import scooterPng from "../assets/scooter.png";
+import VehicleInfoPanel from "../components/VehicleInfoPanel";
 
-// Optional: fallback for default Leaflet icons
+// Fix default marker behavior
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -13,7 +14,7 @@ L.Icon.Default.mergeOptions({
     shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-// Function to return the appropriate icon based on vehicle type
+// Icon switcher
 const getVehicleIcon = (type) => {
     switch (type) {
         case "bike":
@@ -22,14 +23,12 @@ const getVehicleIcon = (type) => {
                 iconSize: [24, 24],
                 className: "custom-fa-icon",
             });
-
         case "car":
             return L.divIcon({
                 html: `<i class="fas fa-car" style="font-size: 24px; color: #2c3e50;"></i>`,
                 iconSize: [24, 24],
                 className: "custom-fa-icon",
             });
-
         case "scooter":
         default:
             return L.icon({
@@ -43,20 +42,33 @@ const getVehicleIcon = (type) => {
 
 const Home = () => {
     const [vehicles, setVehicles] = useState([]);
+    const [selectedVehicle, setSelectedVehicle] = useState(null);
+    const [tab, setTab] = useState("info");
 
     useEffect(() => {
         getVehicles()
             .then((res) => {
                 const parsed = res.data.map((v) => {
                     const [lat, lng] = v.location.split(" ").map(Number);
-                    return { lat, lng, type: v.type || "car" };
+                    return { id: v.id, lat, lng, type: v.type || "car" };
                 });
                 setVehicles(parsed);
             })
-            .catch((err) => {
-                console.error("API Error:", err);
-            });
+            .catch((err) => console.error("API Error:", err));
     }, []);
+
+    const handleVehicleClick = (id) => {
+        getVehicle(id)
+            .then((res) => {
+                setSelectedVehicle(res.data);
+                setTab("info");
+            })
+            .catch((err) => console.error("Vehicle fetch error:", err));
+    };
+
+    const handleHireClick = () => {
+        setTab("hire");
+    };
 
     return (
         <div style={{ position: "relative", height: "100vh", width: "100vw" }}>
@@ -74,15 +86,16 @@ const Home = () => {
                         key={idx}
                         position={[v.lat, v.lng]}
                         icon={getVehicleIcon(v.type)}
+                        eventHandlers={{
+                            click: () => handleVehicleClick(v.id),
+                        }}
                     >
-                        <Popup>
-                            {v.type.charAt(0).toUpperCase() + v.type.slice(1)} at ({v.lat.toFixed(4)}, {v.lng.toFixed(4)})
-                        </Popup>
+                        <Popup>{v.type}</Popup>
                     </Marker>
                 ))}
             </MapContainer>
 
-            {/* Sidebar on right */}
+            {/* Sidebar */}
             <div
                 style={{
                     position: "absolute",
@@ -111,8 +124,12 @@ const Home = () => {
             by Binary-Codesmiths
           </span>
                 </h2>
-                <p>Select a vehicle for further info.</p>
-                {/* Future tab/routing content goes here */}
+
+                <VehicleInfoPanel
+                    vehicle={selectedVehicle}
+                    onHireClick={handleHireClick}
+                    tab={tab}
+                />
             </div>
         </div>
     );
