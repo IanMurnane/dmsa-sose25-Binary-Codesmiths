@@ -82,7 +82,7 @@ const Home = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("userId");
-        setUserId(null);
+        setUserId(0);
         setSelectedVehicle(null);
         setTab("info");
     };
@@ -145,7 +145,7 @@ const Home = () => {
                         </span>
                     </div>
 
-                    {userId && (
+                    {userId !== 0 && (
                         <button
                             onClick={handleLogout}
                             style={{
@@ -170,23 +170,15 @@ const Home = () => {
                     />
                 )}
 
-                {tab === "hire" && !userId && (
+                {tab === "hire" && userId === 0 && (
                     <LoginForm onLoginComplete={handleLoginComplete} />
                 )}
-                {tab === "hire" && userId && (
+                {tab === "hire" && userId !== 0 && (
                     <BookingForm
                         vehicleId={selectedVehicle.id}
                         userId={userId}
                     />
                 )}
-
-                {/*{tab === "book" && localStorage.getItem("userId") && (*/}
-                {/*    <BookingForm*/}
-                {/*        vehicle={selectedVehicle}*/}
-                {/*        onCancel={handleCancelBooking}*/}
-                {/*        onBook={handleBookConfirm}*/}
-                {/*    />*/}
-                {/*)}*/}
             </div>
         </div>
     );
