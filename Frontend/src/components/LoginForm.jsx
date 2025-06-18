@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { createUser } from "../api/apis"; // adjust path if needed
+import {createUser, login} from "../api/apis"; // adjust path if needed
 
-const LoginForm = () => {
+const LoginForm = ({ onLoginComplete }) => {
     const [isCreating, setIsCreating] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
@@ -21,13 +21,31 @@ const LoginForm = () => {
         if (isCreating) {
             try {
                 const res = await createUser(formData.name, formData.email, formData.password);
-                setMessage("✅ " + res.data);
+
+                const userId = res.data?.id;
+                if (userId) {
+                    setMessage("✅ Account created and logged in!");
+                    if (onLoginComplete) onLoginComplete(userId);
+                } else {
+                    setMessage("❌ Failed to retrieve user ID");
+                }
             } catch (err) {
                 setMessage("❌ " + (err.response?.data || "Failed to create user"));
             }
         } else {
-            console.log("Login:", formData.email, formData.password);
-            // TODO: Implement login logic
+            try {
+                const res = await login(formData.email, formData.password); // <== make sure this function exists
+                const userId = res.data?.user?.id;
+
+                if (userId) {
+                    setMessage("✅ Logged in!");
+                    if (onLoginComplete) onLoginComplete(userId);
+                } else {
+                    setMessage("❌ Failed to retrieve user ID");
+                }
+            } catch (err) {
+                setMessage("❌ " + (err.response?.data || "Login failed"));
+            }
         }
     };
 

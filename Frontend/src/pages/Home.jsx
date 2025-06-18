@@ -5,6 +5,8 @@ import L from "leaflet";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import scooterPng from "../assets/scooter.png";
 import VehicleInfoPanel from "../components/VehicleInfoPanel";
+import LoginForm from "../components/LoginForm";
+import BookingForm from "../components/BookingForm";
 
 // Fix default marker behavior
 delete L.Icon.Default.prototype._getIconUrl;
@@ -44,8 +46,11 @@ const Home = () => {
     const [vehicles, setVehicles] = useState([]);
     const [selectedVehicle, setSelectedVehicle] = useState(null);
     const [tab, setTab] = useState("info");
+    const [userId, setUserId] = useState(0);
 
     useEffect(() => {
+        setUserId(parseInt(localStorage.getItem("userId") || 0));
+
         getVehicles()
             .then((res) => {
                 const parsed = res.data.map((v) => {
@@ -68,6 +73,18 @@ const Home = () => {
 
     const handleHireClick = () => {
         setTab("hire");
+    };
+
+    const handleLoginComplete = (userId) => {
+        localStorage.setItem("userId", userId);
+        setUserId(userId);
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem("userId");
+        setUserId(null);
+        setSelectedVehicle(null);
+        setTab("info");
     };
 
     return (
@@ -111,25 +128,65 @@ const Home = () => {
                     zIndex: 1000,
                 }}
             >
-                <h2 style={{ display: "flex", alignItems: "baseline" }}>
-                    Miet Mich
-                    <span
-                        style={{
+                <h2 style={{
+                    display: "flex",
+                    alignItems: "baseline",
+                    justifyContent: "space-between"
+                }}>
+                    <div>
+                        Miet Mich
+                        <span style={{
                             fontSize: "0.8rem",
                             color: "#666",
                             marginLeft: "8px",
-                            fontStyle: "italic",
-                        }}
-                    >
-            by Binary-Codesmiths
-          </span>
+                            fontStyle: "italic"
+                        }}>
+                            by Binary-Codesmiths
+                        </span>
+                    </div>
+
+                    {userId && (
+                        <button
+                            onClick={handleLogout}
+                            style={{
+                                fontSize: "0.8rem",
+                                backgroundColor: "#eee",
+                                border: "1px solid #ccc",
+                                borderRadius: "6px",
+                                padding: "4px 8px",
+                                cursor: "pointer"
+                            }}
+                        >
+                            Logout
+                        </button>
+                    )}
                 </h2>
 
-                <VehicleInfoPanel
-                    vehicle={selectedVehicle}
-                    onHireClick={handleHireClick}
-                    tab={tab}
-                />
+
+                {tab === "info" && (
+                    <VehicleInfoPanel
+                        vehicle={selectedVehicle}
+                        onHireClick={handleHireClick}
+                    />
+                )}
+
+                {tab === "hire" && !userId && (
+                    <LoginForm onLoginComplete={handleLoginComplete} />
+                )}
+                {tab === "hire" && userId && (
+                    <BookingForm
+                        vehicleId={selectedVehicle.id}
+                        userId={userId}
+                    />
+                )}
+
+                {/*{tab === "book" && localStorage.getItem("userId") && (*/}
+                {/*    <BookingForm*/}
+                {/*        vehicle={selectedVehicle}*/}
+                {/*        onCancel={handleCancelBooking}*/}
+                {/*        onBook={handleBookConfirm}*/}
+                {/*    />*/}
+                {/*)}*/}
             </div>
         </div>
     );

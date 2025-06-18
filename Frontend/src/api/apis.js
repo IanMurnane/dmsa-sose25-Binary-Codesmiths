@@ -1,44 +1,50 @@
 import axios from "axios";
 
-const UserAPI = axios.create({baseURL: "http://localhost:8080"});
-const VehicleAPI = axios.create({baseURL: "http://localhost:8082"});
+const UserAPI = axios.create({ baseURL: "http://localhost:8080" });
+const VehicleAPI = axios.create({ baseURL: "http://localhost:8082" });
+const BookingAPI = axios.create({ baseURL: "http://localhost:8081" });
 
+// Users
 export const createUser = (name, email, password) => {
-  return UserAPI.post("/users/register", {
-    fullName: name,
-    email,
-    password,
-    role: "User"
-  }, {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
+  return UserAPI.post(
+      "/users/register",
+      {
+        fullName: name,
+        email,
+        password,
+        role: "User",
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+  );
 };
-export const bookVehicle = (name, email, password) => {
-  return UserAPI.post("/users/register", {
-    fullName: name,
-    email,
-    password,
-    role: "User"
-  }, {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
+export const login = (email, password) => {
+  return UserAPI.post(
+      "/auth/login",
+      {
+        email,
+        password,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+  );
 };
-// export const getUsers = () => UserAPI.get("/users");
-// export const loginUser = (email, password) => {
-//   const params = new URLSearchParams();
-//   params.append("email", email);
-//   params.append("password", password);
-//
-//   return UserAPI.post("/auth/login", params, {
-//     headers: {
-//       "Content-Type": "application/x-www-form-urlencoded"
-//     }
-//   });
-// };
 
+// Vehicles
 export const getVehicles = () => VehicleAPI.get("/vehicles");
 export const getVehicle = (id) => VehicleAPI.get(`/vehicles/${id}`);
+
+// Bookings
+export const getBookings = () => BookingAPI.get("/bookings");
+export const createBooking = (bookingData) =>
+    BookingAPI.post("/bookings", bookingData, {
+      headers: { "Content-Type": "application/json" },
+    });
+export const deleteBooking = (id) =>
+    BookingAPI.delete(`/bookings/${id}`);
