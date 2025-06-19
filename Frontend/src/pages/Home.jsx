@@ -8,6 +8,7 @@ import VehicleInfoPanel from "../components/VehicleInfoPanel";
 import LoginForm from "../components/LoginForm";
 import BookingForm from "../components/BookingForm";
 import PaymentForm from "../components/PaymentForm";
+import RatingForm from "../components/RatingForm";
 
 // Fix default marker behavior
 delete L.Icon.Default.prototype._getIconUrl;
@@ -185,6 +186,7 @@ const Home = () => {
                         vehicleId={selectedVehicle.id}
                         userId={userId}
                         handlePayment={handlePayment}
+                        ratingCallback={() => setTab("rating")}
                     />
                 )}
 
@@ -192,6 +194,16 @@ const Home = () => {
                     <PaymentForm
                         bookingId={bookingId}
                         userId={userId}
+                        closeCallback={() => setTab("hire")}
+                    />
+                )}
+
+                {tab === "rating" && userId !== 0 && (
+                    <RatingForm
+                        userId={userId}
+                        vehicleId={selectedVehicle.id}
+                        bookingId={bookingId}
+                        providerId={selectedVehicle.providerId}
                         closeCallback={() => setTab("hire")}
                     />
                 )}

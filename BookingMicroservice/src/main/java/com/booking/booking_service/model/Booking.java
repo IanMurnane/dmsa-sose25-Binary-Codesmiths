@@ -19,7 +19,9 @@ public class Booking {
 
     @PrePersist
     protected void onCreate() {
-        this.bookingTime = LocalDateTime.now();
+        if (this.bookingTime == null) {
+            this.bookingTime = LocalDateTime.now();
+        }
         if (this.startTime == null) {
             this.startTime = LocalDateTime.now();
         }

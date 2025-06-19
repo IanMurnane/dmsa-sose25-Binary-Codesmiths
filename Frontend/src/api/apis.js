@@ -4,6 +4,7 @@ const UserAPI = axios.create({ baseURL: "http://localhost:8080" });
 const BookingAPI = axios.create({ baseURL: "http://localhost:8081" });
 const VehicleAPI = axios.create({ baseURL: "http://localhost:8082" });
 const PaymentAPI = axios.create({ baseURL: "http://localhost:8083" });
+const RatingAPI = axios.create({ baseURL: "http://localhost:8084" });
 
 // Users
 export const createUser = (name, email, password) => {
@@ -56,3 +57,23 @@ export const processPayment = (paymentData) =>
     PaymentAPI.post("/payments", paymentData, {
         headers: { "Content-Type": "application/json" },
     });
+
+// Ratings
+export const saveRating = (userId, vehicleId, bookingId, providerId, ratingValue, comments) => {
+    return RatingAPI.post(
+        "/ratings",
+        {
+            userId,
+            vehicleId,
+            bookingId,
+            providerId,
+            ratingValue,
+            comments,
+        },
+        {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+    );
+};

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {createBooking, deleteBooking, getBookings} from "../api/apis";
 
-const BookingForm = ({ vehicleId, userId, handlePayment }) => {
+const BookingForm = ({ vehicleId, userId, handlePayment, ratingCallback }) => {
     const [bookings, setBookings] = useState([]);
     const [bookingDate, setBookingDate] = useState("");
 
@@ -20,10 +20,13 @@ const BookingForm = ({ vehicleId, userId, handlePayment }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const bookingDateTime = bookingDate + "T00:00:00"; // send as local datetime string
+
         const booking = {
             userId,
             vehicleId,
-            bookingDate,
+            bookingTime: bookingDateTime,
             status: "REQUIRES PAYMENT",
         };
 
@@ -83,11 +86,14 @@ const BookingForm = ({ vehicleId, userId, handlePayment }) => {
                     <tr key={b.id}>
                         <td>{b.userId}</td>
                         <td>{b.vehicleId}</td>
-                        <td>{formatDate(b.startTime)}</td>
+                        <td>{formatDate(b.bookingTime)}</td>
                         <td>{b.status}</td>
                         <td>
                             {b.status === "REQUIRES PAYMENT" && (
                                 <button onClick={() => handlePayment(b.id)}>Pay</button>
+                            )}
+                            {b.status === "CONFIRMED" && (
+                                <button onClick={() => ratingCallback()}>Rate</button>
                             )}
                         </td>
                         <td>
