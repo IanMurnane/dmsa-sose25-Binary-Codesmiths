@@ -1,8 +1,9 @@
 import axios from "axios";
 
 const UserAPI = axios.create({ baseURL: "http://localhost:8080" });
-const VehicleAPI = axios.create({ baseURL: "http://localhost:8082" });
 const BookingAPI = axios.create({ baseURL: "http://localhost:8081" });
+const VehicleAPI = axios.create({ baseURL: "http://localhost:8082" });
+const PaymentAPI = axios.create({ baseURL: "http://localhost:8083" });
 
 // Users
 export const createUser = (name, email, password) => {
@@ -48,3 +49,10 @@ export const createBooking = (bookingData) =>
     });
 export const deleteBooking = (id) =>
     BookingAPI.delete(`/bookings/${id}`);
+
+// Payments
+export const getPayment = (id) => PaymentAPI.get(`/payments/${id}`);
+export const processPayment = (paymentData) =>
+    PaymentAPI.post("/payments", paymentData, {
+        headers: { "Content-Type": "application/json" },
+    });

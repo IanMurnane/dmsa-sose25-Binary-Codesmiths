@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {createBooking, deleteBooking, getBookings} from "../api/apis";
 
-const BookingForm = ({ vehicleId, userId }) => {
+const BookingForm = ({ vehicleId, userId, handlePayment }) => {
     const [bookings, setBookings] = useState([]);
     const [bookingDate, setBookingDate] = useState("");
 
@@ -24,11 +24,10 @@ const BookingForm = ({ vehicleId, userId }) => {
             userId,
             vehicleId,
             bookingDate,
-            status: "CONFIRMED",
+            status: "REQUIRES PAYMENT",
         };
 
         try {
-            console.log("booking", booking);
             await createBooking(booking);
             setBookingDate("");
             loadBookings();
@@ -68,25 +67,29 @@ const BookingForm = ({ vehicleId, userId }) => {
             </form>
 
             <h2>All Bookings</h2>
-            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>User ID</th>
-                    <th>Vehicle ID</th>
+                    <th>User</th>
+                    <th>Vehicle</th>
                     <th>Booking Date</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 {bookings.map((b) => (
                     <tr key={b.id}>
-                        <td>{b.id}</td>
                         <td>{b.userId}</td>
                         <td>{b.vehicleId}</td>
                         <td>{formatDate(b.startTime)}</td>
                         <td>{b.status}</td>
+                        <td>
+                            {b.status === "REQUIRES PAYMENT" && (
+                                <button onClick={() => handlePayment(b.id)}>Pay</button>
+                            )}
+                        </td>
                         <td>
                             <button onClick={() => handleCancel(b.id)}>Cancel</button>
                         </td>

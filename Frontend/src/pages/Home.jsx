@@ -7,6 +7,7 @@ import scooterPng from "../assets/scooter.png";
 import VehicleInfoPanel from "../components/VehicleInfoPanel";
 import LoginForm from "../components/LoginForm";
 import BookingForm from "../components/BookingForm";
+import PaymentForm from "../components/PaymentForm";
 
 // Fix default marker behavior
 delete L.Icon.Default.prototype._getIconUrl;
@@ -47,6 +48,7 @@ const Home = () => {
     const [selectedVehicle, setSelectedVehicle] = useState(null);
     const [tab, setTab] = useState("info");
     const [userId, setUserId] = useState(0);
+    const [bookingId, setBookingId] = useState(0);
 
     useEffect(() => {
         setUserId(parseInt(localStorage.getItem("userId") || 0));
@@ -85,6 +87,11 @@ const Home = () => {
         setUserId(0);
         setSelectedVehicle(null);
         setTab("info");
+    };
+
+    const handlePayment = (id) => {
+        setBookingId(id);
+        setTab("payment");
     };
 
     return (
@@ -177,6 +184,15 @@ const Home = () => {
                     <BookingForm
                         vehicleId={selectedVehicle.id}
                         userId={userId}
+                        handlePayment={handlePayment}
+                    />
+                )}
+
+                {tab === "payment" && userId !== 0 && (
+                    <PaymentForm
+                        bookingId={bookingId}
+                        userId={userId}
+                        closeCallback={() => setTab("hire")}
                     />
                 )}
             </div>
