@@ -1,0 +1,12 @@
+import domain::userbackend
+
+@technology(Spring)
+microservice UserService {
+    interface UserAPI {
+        operation login(LoginRequest) : LoginResponse
+        operation register(UserDto) : UserDto
+        operation resetPassword(ResetPasswordRequest)
+        operation getAllUsers() : UserDtos
+        operation getUserById(string) : UserDto
+    }
+}
