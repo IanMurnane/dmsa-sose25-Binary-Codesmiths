@@ -1,8 +1,11 @@
 package com.booking.booking_service.controller;
 
+import com.booking.booking_service.dto.PaymentDTO;
+import com.booking.booking_service.dto.PaymentRequest;
 import com.booking.booking_service.dto.VehicleDTO;
 import com.booking.booking_service.model.Booking;
 import com.booking.booking_service.repository.BookingRepository;
+import com.booking.booking_service.service.PaymentClient;
 import com.booking.booking_service.service.VehicleClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,9 @@ public class BookingController {
 
     @Autowired
     private VehicleClient vehicleClient;
+
+    @Autowired
+    private PaymentClient paymentClient;
 
     // Create Booking
     @PostMapping
@@ -43,15 +49,27 @@ public class BookingController {
         bookingRepository.deleteById(id);
     }
 
-    // 🚗 New: Proxy call to get all vehicles
+    // Get All Vehicles (proxy to VEHICLE-SERVICE)
     @GetMapping("/vehicles")
     public List<VehicleDTO> getVehicles() {
         return vehicleClient.getAllVehicles();
     }
 
-    // 🚗 New: Proxy call to get a single vehicle
+    // Get Vehicle by ID (proxy to VEHICLE-SERVICE)
     @GetMapping("/vehicles/{id}")
     public VehicleDTO getVehicle(@PathVariable Long id) {
         return vehicleClient.getVehicleById(id);
+    }
+
+    // Process Payment (proxy to PAYMENT-SERVICE)
+    @PostMapping("/payments")
+    public PaymentDTO processPayment(@RequestBody PaymentRequest request) {
+        return paymentClient.processPayment(request);
+    }
+
+    // Get Payment by ID (proxy to PAYMENT-SERVICE)
+    @GetMapping("/payments/{id}")
+    public PaymentDTO getPayment(@PathVariable Long id) {
+        return paymentClient.getPayment(id);
     }
 }
