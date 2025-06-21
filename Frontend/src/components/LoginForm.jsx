@@ -30,7 +30,7 @@ const LoginForm = ({ onLoginComplete }) => {
                     setMessage("❌ Failed to retrieve user ID");
                 }
             } catch (err) {
-                setMessage("❌ " + (err.response?.data || "Failed to create user"));
+                setMessage("❌ " + (err.response?.data.message || err.response?.data || "Failed to create user"));
             }
         } else {
             try {
@@ -44,7 +44,7 @@ const LoginForm = ({ onLoginComplete }) => {
                     setMessage("❌ Failed to retrieve user ID");
                 }
             } catch (err) {
-                setMessage("❌ " + (err.response?.data || "Login failed"));
+                setMessage("❌ " + (err.response?.data.message || err.response?.data || "Login failed"));
             }
         }
     };

@@ -1,19 +1,19 @@
 package com.booking.booking_service.controller;
 
-import com.booking.booking_service.dto.PaymentDTO;
-import com.booking.booking_service.dto.PaymentRequest;
-import com.booking.booking_service.dto.RatingDTO;
-import com.booking.booking_service.dto.VehicleDTO;
+import com.booking.booking_service.dto.*;
+import com.booking.booking_service.entity.User;
 import com.booking.booking_service.model.Booking;
 import com.booking.booking_service.repository.BookingRepository;
 import com.booking.booking_service.service.PaymentClient;
 import com.booking.booking_service.service.RatingClient;
+import com.booking.booking_service.service.UserClient;
 import com.booking.booking_service.service.VehicleClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -30,6 +30,9 @@ public class BookingController {
 
     @Autowired
     private RatingClient ratingClient;
+
+    @Autowired
+    private UserClient userClient;
 
     // Booking endpoints...
     @PostMapping("/bookings")
@@ -78,5 +81,22 @@ public class BookingController {
     @PostMapping("/ratings")
     public ResponseEntity<?> submitRating(@RequestBody RatingDTO ratingDTO) {
         return ratingClient.createRating(ratingDTO);
+    }
+
+    // Auth Proxy
+    @PostMapping("/auth/login")
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
+        return userClient.login(request);
+    }
+
+    // User Proxy
+    @PostMapping("/users/register")
+    public ResponseEntity<Map<String, Long>> registerUser(@RequestBody UserDTO userDTO) {
+        return userClient.registerUser(userDTO);
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
+        return userClient.getUser(id);
     }
 }

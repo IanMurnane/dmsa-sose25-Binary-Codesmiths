@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const UserAPI = axios.create({ baseURL: "http://localhost:8080" });
+// const UserAPI = axios.create({ baseURL: "http://localhost:8080" });
 const BookingAPI = axios.create({ baseURL: "http://localhost:8081/api" });
 // const VehicleAPI = axios.create({ baseURL: "http://localhost:8082" });
 // const PaymentAPI = axios.create({ baseURL: "http://localhost:8083" });
@@ -8,7 +8,7 @@ const BookingAPI = axios.create({ baseURL: "http://localhost:8081/api" });
 
 // Users
 export const createUser = (name, email, password) => {
-  return UserAPI.post(
+  return BookingAPI.post(
       "/users/register",
       {
         fullName: name,
@@ -24,7 +24,7 @@ export const createUser = (name, email, password) => {
   );
 };
 export const login = (email, password) => {
-  return UserAPI.post(
+  return BookingAPI.post(
       "/auth/login",
       {
         email,
