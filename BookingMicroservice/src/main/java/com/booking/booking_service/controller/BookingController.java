@@ -1,7 +1,9 @@
 package com.booking.booking_service.controller;
 
+import com.booking.booking_service.dto.VehicleDTO;
 import com.booking.booking_service.model.Booking;
 import com.booking.booking_service.repository.BookingRepository;
+import com.booking.booking_service.service.VehicleClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,11 +11,14 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/bookings")
-public class BookingController { // Class name should start with a capital letter
+@RequestMapping("/api")
+public class BookingController {
 
     @Autowired
     private BookingRepository bookingRepository;
+
+    @Autowired
+    private VehicleClient vehicleClient;
 
     // Create Booking
     @PostMapping
@@ -37,5 +42,17 @@ public class BookingController { // Class name should start with a capital lette
     @DeleteMapping("/{id}")
     public void cancelBooking(@PathVariable Long id) {
         bookingRepository.deleteById(id);
+    }
+
+    // 🚗 New: Proxy call to get all vehicles
+    @GetMapping("/vehicles")
+    public List<VehicleDTO> getVehicles() {
+        return vehicleClient.getAllVehicles();
+    }
+
+    // 🚗 New: Proxy call to get a single vehicle
+    @GetMapping("/vehicles/{id}")
+    public VehicleDTO getVehicle(@PathVariable Long id) {
+        return vehicleClient.getVehicleById(id);
     }
 }
