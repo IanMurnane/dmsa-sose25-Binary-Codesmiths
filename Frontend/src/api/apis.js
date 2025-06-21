@@ -4,7 +4,7 @@ const UserAPI = axios.create({ baseURL: "http://localhost:8080" });
 const BookingAPI = axios.create({ baseURL: "http://localhost:8081/api" });
 // const VehicleAPI = axios.create({ baseURL: "http://localhost:8082" });
 // const PaymentAPI = axios.create({ baseURL: "http://localhost:8083" });
-const RatingAPI = axios.create({ baseURL: "http://localhost:8084" });
+// const RatingAPI = axios.create({ baseURL: "http://localhost:8084" });
 
 // Users
 export const createUser = (name, email, password) => {
@@ -43,13 +43,13 @@ export const getVehicles = () => BookingAPI.get("/vehicles");
 export const getVehicle = (id) => BookingAPI.get(`/vehicles/${id}`);
 
 // Bookings
-export const getBookings = () => BookingAPI.get("");
+export const getBookings = () => BookingAPI.get("/bookings");
 export const createBooking = (bookingData) =>
-    BookingAPI.post("", bookingData, {
+    BookingAPI.post("/bookings", bookingData, {
       headers: { "Content-Type": "application/json" },
     });
 export const deleteBooking = (id) =>
-    BookingAPI.delete(`/${id}`);
+    BookingAPI.delete(`/bookings/${id}`);
 
 // Payments
 export const getPayment = (id) => BookingAPI.get(`/payments/${id}`);
@@ -60,7 +60,7 @@ export const processPayment = (paymentData) =>
 
 // Ratings
 export const saveRating = (userId, vehicleId, bookingId, providerId, ratingValue, comments) => {
-    return RatingAPI.post(
+    return BookingAPI.post(
         "/ratings",
         {
             userId,
