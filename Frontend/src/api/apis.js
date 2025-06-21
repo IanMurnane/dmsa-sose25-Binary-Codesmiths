@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const UserAPI = axios.create({ baseURL: "http://localhost:8080" });
-const BookingAPI = axios.create({ baseURL: "http://localhost:8081" });
-const VehicleAPI = axios.create({ baseURL: "http://localhost:8082" });
+const BookingAPI = axios.create({ baseURL: "http://localhost:8081/api" });
+// const VehicleAPI = axios.create({ baseURL: "http://localhost:8082" });
 const PaymentAPI = axios.create({ baseURL: "http://localhost:8083" });
 const RatingAPI = axios.create({ baseURL: "http://localhost:8084" });
 
@@ -39,17 +39,17 @@ export const login = (email, password) => {
 };
 
 // Vehicles
-export const getVehicles = () => VehicleAPI.get("/vehicles");
-export const getVehicle = (id) => VehicleAPI.get(`/vehicles/${id}`);
+export const getVehicles = () => BookingAPI.get("/vehicles");
+export const getVehicle = (id) => BookingAPI.get(`/vehicles/${id}`);
 
 // Bookings
-export const getBookings = () => BookingAPI.get("/bookings");
+export const getBookings = () => BookingAPI.get("");
 export const createBooking = (bookingData) =>
-    BookingAPI.post("/bookings", bookingData, {
+    BookingAPI.post("", bookingData, {
       headers: { "Content-Type": "application/json" },
     });
 export const deleteBooking = (id) =>
-    BookingAPI.delete(`/bookings/${id}`);
+    BookingAPI.delete(`/${id}`);
 
 // Payments
 export const getPayment = (id) => PaymentAPI.get(`/payments/${id}`);
