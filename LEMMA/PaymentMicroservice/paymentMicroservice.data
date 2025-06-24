@@ -1,0 +1,18 @@
+boundedContext PaymentMicroservice
+
+import ScalarTypes
+
+entity Payment {
+    key id: String
+    bookingId: String
+    userId: String
+    amount: Double
+    paymentMethod: String // e.g. credit_card, paypal
+    paymentTime: String   // (e.g. "2025-04-08T10:00:00")
+    status: String        // success, failed, pending
+}
+
+valueObject BillingModel {
+    rate: Double
+    unit: String  // per_hour or per_kilometer
+}
