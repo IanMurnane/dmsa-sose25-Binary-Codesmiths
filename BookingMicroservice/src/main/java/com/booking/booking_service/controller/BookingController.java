@@ -45,9 +45,11 @@ public class BookingController {
         return bookingRepository.findAll();
     }
 
-    @GetMapping("/bookings/user/{userId}")
-    public List<Booking> getBookingsByUserId(@PathVariable Long userId) {
-        return bookingRepository.findByUserId(userId);
+    @GetMapping("/bookings/{id}")
+    public ResponseEntity<Booking> getBookingById(@PathVariable Long id) {
+        return bookingRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/bookings/{id}")
