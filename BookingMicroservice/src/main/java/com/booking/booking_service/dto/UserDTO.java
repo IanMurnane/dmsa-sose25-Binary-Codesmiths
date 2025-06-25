@@ -1,4 +1,4 @@
-package com.mobility.usermicroservice.dto;
+package com.booking.booking_service.dto;
 
 import lombok.Data;
 

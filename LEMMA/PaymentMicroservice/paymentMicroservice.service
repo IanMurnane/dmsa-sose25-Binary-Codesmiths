@@ -1,0 +1,25 @@
+service PaymentService {
+    import context PaymentMicroservice
+
+    operation processPayment {
+        input: ProcessPaymentRequest
+        output: PaymentResponse
+    }
+
+    operation getPaymentByBookingId {
+        input: String // bookingId
+        output: Payment
+    }
+}
+
+dataStructure ProcessPaymentRequest {
+    bookingId: String
+    userId: String
+    amount: Double
+    paymentMethod: String
+}
+
+dataStructure PaymentResponse {
+    paymentId: String
+    status: String
+}

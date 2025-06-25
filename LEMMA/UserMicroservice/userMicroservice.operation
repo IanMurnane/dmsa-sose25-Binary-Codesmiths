@@ -1,0 +1,21 @@
+@technology(Docker)
+@technology(HTTP)
+container UserMicroserviceContainer {
+    deployment technology Docker::_deployment.Docker
+    deploys service::UserService {
+        aspects {
+            Docker::_aspects.Dockerfile(
+                '''
+                COPY UserMicroservice-0.0.1-SNAPSHOT.jar .
+                CMD ["java", "-jar", "UserMicroservice-0.0.1-SNAPSHOT.jar"]
+                '''
+            )
+        }
+        default values {
+            basic endpoints {
+                protocol = HTTP::_protocols.Http
+                port = 8080
+            }
+        }
+    }
+}
