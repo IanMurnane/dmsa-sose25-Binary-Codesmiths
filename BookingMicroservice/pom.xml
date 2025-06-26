@@ -10,7 +10,7 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>2.7.18</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <relativePath/>
   </parent>
 
   <groupId>com.booking</groupId>
@@ -20,14 +20,14 @@
   <description>Maven project for Spring Boot</description>
 
   <properties>
-    <java.version>17</java.version>
-    <!-- Spring Cloud 2021.x is compatible with Spring Boot 2.7.x -->
+    <!-- Changed java.version from 17 to 11 -->
+    <java.version>11</java.version>
+    <lombok.version>1.18.26</lombok.version>
     <spring-cloud.version>2021.0.3</spring-cloud.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
-      <!-- Import the Spring Cloud BOM -->
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
@@ -92,6 +92,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
       <optional>true</optional>
     </dependency>
 
@@ -100,12 +101,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
-    </dependency>
-
-    <!-- Eureka Client (for service discovery) -->
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
     </dependency>
 
     <!-- Spring Cloud Config Client -->
@@ -117,16 +112,22 @@
 
   <build>
     <plugins>
-      <!-- Compiler plugin for Lombok annotation processing -->
+      <!-- Maven Compiler Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.10.1</version>
         <configuration>
+          <!-- Changed source and target from 17 to 11 -->
+          <source>11</source>
+          <target>11</target>
+          <fork>true</fork>
+          <executable>${JAVA_HOME}/bin/javac</executable>
           <annotationProcessorPaths>
             <path>
               <groupId>org.projectlombok</groupId>
               <artifactId>lombok</artifactId>
-              <version>1.18.28</version>
+              <version>${lombok.version}</version>
             </path>
           </annotationProcessorPaths>
         </configuration>
