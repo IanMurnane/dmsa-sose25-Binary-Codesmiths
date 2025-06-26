@@ -1,0 +1,48 @@
+service VehicleService {
+    import context VehicleMicroservice
+
+    operation createVehicle {
+        input: Vehicle
+        output: Vehicle
+    }
+
+    operation getVehicle {
+        input: String
+        output: Vehicle
+    }
+
+    operation updateVehicle {
+        input: UpdateVehicleRequest
+        output: Vehicle
+    }
+
+    operation deleteVehicle {
+        input: String
+    }
+
+    operation getVehiclesByProvider {
+        input: String
+        output: List<Vehicle>
+    }
+
+    operation getAllVehicles {
+        output: List<Vehicle>
+    }
+}
+
+dataStructure UpdateVehicleRequest {
+    vehicleId: String
+    vehicle: Vehicle
+}
+
+dataStructure Vehicle {
+    id: String
+    providerId: String
+    type: String
+    model: String
+    pricePerHour: Double
+    billingModel: String
+    status: String
+    location: String
+    lastUpdated: String
+}
