@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import {getVehicles} from "../api/vehicleApi";
 
 export default function Vehicles() {
   const [vehicles, setVehicles] = useState([]);
@@ -13,7 +14,7 @@ export default function Vehicles() {
 
   // Fetch provider's vehicles
   useEffect(() => {
-    axios.get('http://localhost:8082/vehicles')
+      getVehicles()
       .then(res => setVehicles(res.data))
       .catch(err => console.error(err));
   }, []);
