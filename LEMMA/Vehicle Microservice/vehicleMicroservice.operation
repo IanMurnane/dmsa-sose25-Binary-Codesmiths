@@ -1,0 +1,25 @@
+@technology(Docker)
+@technology(HTTP)
+
+container VehicleContainer {
+    deployment technology Docker::_deployment.Docker
+
+    deploys VehicleService::VehicleService {
+        aspects {
+            Docker::_aspects.Dockerfile(
+                '''
+                COPY VehicleMicroservice-0.0.1-SNAPSHOT.jar .
+                CMD ["java", "-jar", "VehicleMicroservice-0.0.1-SNAPSHOT.jar"]
+                '''
+            );
+        }
+
+        default values {
+            basic endpoints {
+                protocol = HTTP::_protocols.Http
+                port: 8082
+                address = "http://localhost"
+            }
+        }
+    }
+}

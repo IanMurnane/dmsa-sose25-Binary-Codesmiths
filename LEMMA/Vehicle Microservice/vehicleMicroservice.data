@@ -1,0 +1,15 @@
+boundedContext VehicleMicroservice
+
+import ScalarTypes
+
+entity Vehicle {
+    key id: String
+    providerId: String
+    type: String
+    model: String
+    pricePerHour: Double
+    billingModel: String
+    status: String
+    location: String
+    lastUpdated: String
+}
