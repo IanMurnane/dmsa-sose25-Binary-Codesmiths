@@ -1,0 +1,13 @@
+boundedContext RatingMicroservice
+
+import ScalarTypes
+
+entity Rating {
+    key ratingId: Long
+    userId: String
+    vehicleId: String
+    bookingId: String
+    providerId: String
+    ratingValue: Integer
+    comments: String nullable
+} 
