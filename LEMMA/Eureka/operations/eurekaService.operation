@@ -1,0 +1,25 @@
+@technology(Docker)
+@technology(HTTP)
+
+container EurekaContainer {
+    deployment technology Docker::_deployment.Docker
+
+    deploys EurekaService::EurekaApplication {
+        aspects {
+            Docker::_aspects.Dockerfile(
+                '''
+                COPY eureka-0.0.1-SNAPSHOT.jar .
+                CMD ["java", "-jar", "eureka-0.0.1-SNAPSHOT.jar"]
+                '''
+            );
+        }
+
+        default values {
+            basic endpoints {
+                protocol = HTTP::_protocols.Http
+                port: 8761
+                address = "http://localhost
+            }
+        }
+    }
+}
