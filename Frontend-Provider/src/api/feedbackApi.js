@@ -1,6 +1,7 @@
 import axios from 'axios';
-const FEEDBACK_SERVICE_URL = 'http://localhost:8084';
+
+const BookingAPI = axios.create({ baseURL: "http://localhost:8081/api" });
 
 export const getFeedbackByProvider = async (providerId) => {
-  return axios.get(`${FEEDBACK_SERVICE_URL}/feedback/provider/${providerId}`);
+  return BookingAPI.get(`/feedback/${providerId}`);
 };

@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// const VEHICLE_SERVICE_URL = 'http://localhost:8082';
 const BookingAPI = axios.create({ baseURL: "http://localhost:8081/api" });
 
 export const getVehicles = async () => {

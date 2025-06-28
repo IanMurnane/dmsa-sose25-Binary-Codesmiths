@@ -1,23 +1,23 @@
 import axios from 'axios';
 
-const USER_SERVICE_URL = 'http://localhost:8080';
+const BookingAPI = axios.create({ baseURL: "http://localhost:8081/api" });
 
 export const registerUser = async (userData) => {
-  return axios.post(`${USER_SERVICE_URL}/auth/register`, userData);
+  return BookingAPI.post(`/auth/register`, userData);
 };
 
 export const loginUser = async (credentials) => {
-  return axios.post(`${USER_SERVICE_URL}/auth/login`, credentials);
+  return BookingAPI.post(`/auth/login`, credentials);
 };
 
 export const getUserProfile = async (userId) => {
-  return axios.get(`${USER_SERVICE_URL}/users/${userId}`);
+  return BookingAPI.get(`/users/${userId}`);
 };
 
 export const updateUserProfile = async (userId, userData) => {
-  return axios.put(`${USER_SERVICE_URL}/users/${userId}`, userData);
+  return BookingAPI.put(`/users/${userId}`, userData);
 };
 
 export const deleteUser = async (userId) => {
-  return axios.delete(`${USER_SERVICE_URL}/users/${userId}`);
+  return BookingAPI.delete(`/users/${userId}`);
 };

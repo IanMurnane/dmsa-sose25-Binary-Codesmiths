@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const PAYMENT_SERVICE_URL = 'http://localhost:8083';
+const BookingAPI = axios.create({ baseURL: "http://localhost:8081/api" });
 
 export const processPayment = async (paymentData) => {
-  return axios.post(`${PAYMENT_SERVICE_URL}/payments`, paymentData);
+  return BookingAPI.post(`/payments`, paymentData);
 };
 
 export const getPaymentDetails = async (bookingId) => {
-  return axios.get(`${PAYMENT_SERVICE_URL}/payments/${bookingId}`);
+  return BookingAPI.get(`/payments/${bookingId}`);
 };

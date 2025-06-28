@@ -1,19 +1,23 @@
 import axios from 'axios';
 
-const BOOKING_SERVICE_BASE_URL = 'http://localhost:8081';
+const BookingAPI = axios.create({ baseURL: "http://localhost:8081/api" });
+
+export const getProviderBookings = async (providerId) => {
+  return BookingAPI.get(`/bookings/provider/${providerId}`);
+};
 
 export const getBookings = async (userId) => {
-  return axios.get(`${BOOKING_SERVICE_BASE_URL}/bookings/${userId}`);
+  return BookingAPI.get(`/bookings/${userId}`);
 };
 
 export const createBooking = async (bookingData) => {
-  return axios.post(`${BOOKING_SERVICE_BASE_URL}/bookings`, bookingData);
+  return BookingAPI.post(`/bookings`, bookingData);
 };
 
 export const endBooking = async (bookingId) => {
-  return axios.put(`${BOOKING_SERVICE_BASE_URL}/bookings/${bookingId}/end`);
+  return BookingAPI.put(`/bookings/${bookingId}/end`);
 };
 
 export const deleteBooking = async (bookingId) => {
-  return axios.delete(`${BOOKING_SERVICE_BASE_URL}/bookings/${bookingId}`);
+  return BookingAPI.delete(`/bookings/${bookingId}`);
 };
