@@ -1,23 +1,22 @@
-import microservices from "../microservices/User.services" as UserServices
+import microservices from "../microservices/Config.services" as ConfigServices
 import technology from "../../technology/docker.technology" as Docker
 import technology from "../../technology/JavaSpring.technology" as JavaSpring
 import technology from "../../technology/Protocols.technology" as Protocols
 
 @technology(Docker)
 @technology(Protocols)
-container UserServiceContainer deployment technology Docker::_deployment.Docker
-    deploys UserServices::com.mobility.usermicroservice.UserService {
-        UserServices::com.mobility.usermicroservice.UserService {
+container ConfigServerContainer deployment technology Docker::_deployment.Docker
+    deploys ConfigServices::com.mobility.configserver.ConfigServer {
+        ConfigServices::com.mobility.configserver.ConfigServer {
             Dockerfile('
                 FROM eclipse-temurin:21-jre-alpine
                 WORKDIR /app
-                COPY target/usermicroservice-0.0.1-SNAPSHOT.jar app.jar
-                EXPOSE 8080
+                COPY target/config-server-0.0.1-SNAPSHOT.jar app.jar
+                EXPOSE 8888
                 ENTRYPOINT ["java", "-jar", "app.jar"]
             ')
-
             basic endpoints {
-                Protocols::_protocols.rest: "8080:8080";
+                Protocols::_protocols.rest: "8888:8888";
             }
         }
     }
