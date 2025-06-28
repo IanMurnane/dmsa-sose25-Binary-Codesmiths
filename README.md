@@ -21,12 +21,18 @@ docker run --name my_pgadmin  --network postgres_network -e PGADMIN_DEFAULT_EMAI
 
 To run the project locally:
 
-1. Start the **Eureka Server**.
+1. Start the **ConfigServer**       
+    - mvn spring-boot:run    
+
+    Note: The configuration files are maintained in a separate Git repository. This repository is directly linked to the Config Server used in this project.
+    🔗 Configuration Repository: [instant-mobility-config](https://github.com/mariasaleem11228/instant-mobility-config.git)
+
+2. Start the **Eureka Server**.
     - mvn clean install
     - mvn spring-boot:run
-2. Start each microservice
-   - `Config`, `Booking`, `Payment`, `Rating`, `User`, `Vehicle`
-3. Ensure each service registers with Eureka (visible in Eureka dashboard- http://localhost:8761/) .
-4. Start React frontend (`npm install` & `npm start`)
-5. Access app at http://localhost:3000, backend runs at http://localhost:8080, 8081, 8082 etc.
-6. Use Postman to test the REST APIs (see endpoints in the wiki).
+3. Start each microservice
+   - `Booking`, `Payment`, `Rating`, `User`, `Vehicle`
+4. Ensure each service registers with Eureka (visible in Eureka dashboard- http://localhost:8761/) .
+5. Start React frontend (`npm install` & `npm start`)
+6. Access app at http://localhost:3000, backend runs at http://localhost:8080, 8081, 8082 etc.
+7. Use Postman to test the REST APIs (see endpoints in the wiki).
