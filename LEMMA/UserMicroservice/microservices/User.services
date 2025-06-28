@@ -1,0 +1,63 @@
+import datatypes from "../domain/User.data" as UserDomain
+import technology from "../../technology/Protocols.technology" as Protocols
+import technology from "../../technology/JavaSpring.technology" as JavaSpring
+
+@technology(JavaSpring)
+@technology(Protocols)
+@sync(Protocols::_protocols.rest)
+functional microservice com.mobility.usermicroservice.UserService {
+
+    @endpoints(Protocols::_protocols.rest: "/auth";)
+    interface Auth {
+    	@endpoints(Protocols::_protocols.rest:"/login";)
+        @JavaSpring::_aspects.PostMapping
+        login(
+            sync in request : UserDomain::User.LoginRequest,
+            sync out response : UserDomain::User.LoginResponse
+        );
+
+		@endpoints(Protocols::_protocols.rest:"/reset-password";)
+        @JavaSpring::_aspects.PostMapping
+        resetPassword(
+            sync in request : UserDomain::User.ResetPasswordRequest,
+            sync out response : string
+        );
+    }
+
+    @endpoints(Protocols::_protocols.rest: "/users";)
+    interface Users {
+    	@endpoints(Protocols::_protocols.rest:"/register";)
+        @JavaSpring::_aspects.PostMapping
+        registerUser(
+            sync in request : UserDomain::User.UserDto,
+            sync out response : string
+        );
+
+        @JavaSpring::_aspects.GetMapping
+        getAllUsers(
+            sync out users : UserDomain::User.UserDtos
+        );
+
+		@endpoints(Protocols::_protocols.rest: "/{id}";)
+        @JavaSpring::_aspects.GetMapping
+        getUserById(
+            @JavaSpring::_aspects.PathVariable
+            sync in id : long,
+            sync out user : UserDomain::User.User
+        );
+
+		@JavaSpring::_aspects.PutMapping("/{id}")
+        updateUser(
+            @JavaSpring::_aspects.PathVariable
+            sync in id : long,
+            sync in request : UserDomain::User.UserDto,
+            sync out user : UserDomain::User.User
+        );
+
+        @JavaSpring::_aspects.DeleteMapping("/{id}")
+        deleteUser(
+            @JavaSpring::_aspects.PathVariable
+            sync in id : long
+        );
+    }
+}
