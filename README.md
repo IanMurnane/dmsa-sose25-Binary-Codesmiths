@@ -21,8 +21,12 @@ docker run --name my_pgadmin  --network postgres_network -e PGADMIN_DEFAULT_EMAI
 
 To run the project locally:
 
-1. Start the **ConfigServer**
-    - mvn spring-boot:run
+1. Start the **ConfigServer**       
+    - mvn spring-boot:run    
+
+    Note: The configuration files are maintained in a separate Git repository. This repository is directly linked to the Config Server used in this project.
+    🔗 Configuration Repository: [instant-mobility-config](https://github.com/mariasaleem11228/instant-mobility-config.git)
+
 2. Start the **Eureka Server**.
     - mvn clean install
     - mvn spring-boot:run
