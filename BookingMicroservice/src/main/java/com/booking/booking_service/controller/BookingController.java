@@ -4,6 +4,7 @@ import com.booking.booking_service.dto.*;
 import com.booking.booking_service.entity.User;
 import com.booking.booking_service.model.Booking;
 import com.booking.booking_service.repository.BookingRepository;
+import com.booking.booking_service.service.bookingService;
 import com.booking.booking_service.service.PaymentClient;
 import com.booking.booking_service.service.RatingClient;
 import com.booking.booking_service.service.UserClient;
@@ -23,6 +24,9 @@ public class BookingController {
     private BookingRepository bookingRepository;
 
     @Autowired
+    private bookingService bookingService;
+
+    @Autowired
     private VehicleClient vehicleClient;
 
     @Autowired
@@ -37,7 +41,7 @@ public class BookingController {
     // Booking endpoints...
     @PostMapping("/bookings")
     public Booking createBooking(@RequestBody Booking booking) {
-        return bookingRepository.save(booking);
+        return bookingService.createBooking(booking);
     }
 
     @GetMapping("/bookings")

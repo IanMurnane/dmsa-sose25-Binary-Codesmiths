@@ -17,6 +17,8 @@ public class Booking {
     private LocalDateTime endTime;
     private String status;
     private Double price;
+    private String paymentStatus;
+    private Double amount;
 
     @PrePersist
     protected void onCreate() {
@@ -25,6 +27,15 @@ public class Booking {
         }
         if (this.startTime == null) {
             this.startTime = LocalDateTime.now();
+        }
+        if (this.status == null) {
+            this.status = "PENDING";
+        }
+        if (this.paymentStatus == null) {
+            this.paymentStatus = "PENDING";
+        }
+        if (this.amount == null && this.price != null) {
+            this.amount = this.price;
         }
     }
 
@@ -92,5 +103,21 @@ public class Booking {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+    
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 }

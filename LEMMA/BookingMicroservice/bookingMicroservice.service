@@ -1,0 +1,8 @@
+service BookingAPI {
+  import data structure BookingData from "bookingMicroservice.data"
+
+  operation getAllBookings(): List<BookingData>
+  operation getBookingById(id: String): BookingData
+  operation createBooking(input: BookingData): BookingData
+  operation cancelBooking(id: String): void
+}

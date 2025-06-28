@@ -1,0 +1,13 @@
+boundedContext BookingMicroservice
+
+import ScalarTypes
+
+entity Booking {
+  key id: String
+  userId: String
+  vehicleId: String
+  startTime: String
+  endTime: String
+  status: String     // e.g., "CONFIRMED", "CANCELLED"
+  price: Double
+}

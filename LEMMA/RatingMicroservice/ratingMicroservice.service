@@ -1,0 +1,92 @@
+service RatingService {
+    import context RatingMicroservice
+
+    // Create a new rating
+    operation createRating {
+        input: RatingDTO
+        output: Rating
+    }
+
+    // Get all ratings
+    operation getAllRatings {
+        output: List<Rating>
+    }
+
+    // Get rating by ID
+    operation getRatingById {
+        input: Long
+        output: Rating
+    }
+
+    // Update rating
+    operation updateRating {
+        input: UpdateRatingRequest
+        output: Rating
+    }
+
+    // Delete rating
+    operation deleteRating {
+        input: Long
+    }
+
+    // Get ratings by user ID
+    operation getRatingsByUserId {
+        input: String
+        output: List<Rating>
+    }
+
+    // Get ratings by vehicle ID
+    operation getRatingsByVehicleId {
+        input: String
+        output: List<Rating>
+    }
+
+    // Get ratings by booking ID
+    operation getRatingsByBookingId {
+        input: String
+        output: List<Rating>
+    }
+
+    // Get ratings by provider ID
+    operation getRatingsByProviderId {
+        input: String
+        output: List<Rating>
+    }
+
+    // Get average rating by vehicle ID
+    operation getAverageRatingByVehicleId {
+        input: String
+        output: Double
+    }
+
+    // Get average rating by provider ID
+    operation getAverageRatingByProviderId {
+        input: String
+        output: Double
+    }
+}
+
+// Data transfer objects
+dataStructure RatingDTO {
+    userId: String
+    vehicleId: String
+    bookingId: String
+    providerId: String
+    ratingValue: Integer
+    comments: String nullable
+}
+
+dataStructure UpdateRatingRequest {
+    ratingId: Long
+    rating: RatingDTO
+}
+
+dataStructure Rating {
+    ratingId: Long
+    userId: String
+    vehicleId: String
+    bookingId: String
+    providerId: String
+    ratingValue: Integer
+    comments: String nullable
+} 

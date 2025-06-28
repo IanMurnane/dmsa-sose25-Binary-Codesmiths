@@ -1,21 +1,25 @@
 @technology(Docker)
 @technology(HTTP)
-container UserMicroserviceContainer {
+
+container RatingContainer {
     deployment technology Docker::_deployment.Docker
-    deploys service::UserService {
+
+    deploys RatingService::RatingService {
         aspects {
             Docker::_aspects.Dockerfile(
                 '''
-                COPY UserMicroservice-0.0.1-SNAPSHOT.jar .
-                CMD ["java", "-jar", "UserMicroservice-0.0.1-SNAPSHOT.jar"]
+                COPY RatingMicroservice-0.0.1-SNAPSHOT.jar .
+                CMD ["java", "-jar", "RatingMicroservice-0.0.1-SNAPSHOT.jar"]
                 '''
-            )
+            );
         }
+
         default values {
             basic endpoints {
                 protocol = HTTP::_protocols.Http
-                port = 8080
+                port: 8083
+                address = "http://localhost"
             }
         }
     }
-}
+} 

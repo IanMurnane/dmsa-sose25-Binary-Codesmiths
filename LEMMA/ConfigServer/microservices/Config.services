@@ -1,0 +1,10 @@
+import technology from "../../technology/JavaSpring.technology" as JavaSpring
+
+@technology(JavaSpring)
+functional microservice com.mobility.configserver.ConfigServer {
+    interface ConfigAPI {		//Correct to declare interface even if empty (required by LEMMA)
+        // Config Server typically doesn't expose modeled endpoints
+        
+        //error reason: even though it's valid to have an interface with no actual HTTP endpoints in real Spring Boot code (like in my Config Server), but LEMMA requires that every interface must contain at least one operation?
+    }
+}
