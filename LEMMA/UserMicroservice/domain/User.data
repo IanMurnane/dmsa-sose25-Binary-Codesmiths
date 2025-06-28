@@ -1,0 +1,39 @@
+context User {
+	structure User<entity>{
+		long id<identifier>,
+		string fullName,
+        string email,
+        string password,
+        string role 
+	}
+	
+	// DTO for login request
+    structure LoginRequest<valueObject> {
+        immutable string email,
+        immutable string password
+    }
+    
+    // DTO for login response
+    structure LoginResponse<valueObject> {
+        immutable string message,
+        immutable User user
+    }
+
+    // DTO for resetting password
+    structure ResetPasswordRequest<valueObject> {
+        immutable string email,
+        immutable string currentPassword,
+        immutable string newPassword
+    }
+
+    // DTO for user transfer
+    structure UserDto<valueObject> {
+        immutable string fullName,
+        immutable string email,
+        immutable string password,
+        immutable string role
+    }
+
+    // Optional collection of users
+    collection UserDtos { UserDto u }
+}
