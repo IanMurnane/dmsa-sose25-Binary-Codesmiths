@@ -1,0 +1,77 @@
+@startuml
+
+' ========== Core Domain Classes ==========
+
+class User {
+  Long id
+  String fullName
+  String email
+  String password
+  String role
+}
+
+class Vehicle {
+  Long id
+  Long providerId
+  String type
+  String model
+  BigDecimal pricePerHour
+  String billingModel
+  String status
+  String location
+  LocalDateTime lastUpdated
+}
+
+class BillingModel {
+  String unit
+  Double rate
+  <<@Embeddable>>
+}
+
+class Payment {
+  Long id
+  Long bookingId
+  Long userId
+  Double amount
+  BillingModel billingModel
+  String paymentMethod
+  LocalDateTime paymentTime
+}
+
+class Rating {
+  Long ratingId
+  String userId
+  String vehicleId
+  String bookingId
+  String providerId
+  Integer ratingValue
+  String comments
+}
+
+class Booking {
+  Long id
+  Long userId
+  Long vehicleId
+  LocalDateTime bookingTime
+  LocalDateTime startTime
+  LocalDateTime endTime
+  String status
+  Double price
+  String paymentStatus
+  Double amount
+}
+
+' ========== Relationships ==========
+
+Payment --> User : userId
+Payment --> Booking : bookingId
+Payment --> BillingModel : embeds
+
+Booking --> User : userId
+Booking --> Vehicle : vehicleId
+
+Rating --> User : userId
+Rating --> Vehicle : vehicleId
+Rating --> Booking : bookingId
+
+@enduml
