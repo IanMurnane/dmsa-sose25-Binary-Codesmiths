@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const BookingAPI = axios.create({ baseURL: "http://localhost:8081/api" });
 
-export const getProviderBookings = async (providerId) => {
-  return BookingAPI.get(`/bookings/provider/${providerId}`);
+export const getProviderBookings = async () => {
+  return BookingAPI.get(`/bookings`);
 };
 
 export const getBookings = async (userId) => {

@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { getUserProfile } from '../api/userApi';
 
 export default function Profile() {
   const [provider, setProvider] = useState(null);
-  const providerId = localStorage.getItem('providerId');
 
   useEffect(() => {
-    if (!providerId) return;
-
-    axios.get(`http://localhost:8080/users/${providerId}`)
+    getUserProfile()
       .then(res => setProvider(res.data))
       .catch(err => console.error('Error fetching provider profile:', err));
-  }, [providerId]);
+  }, []);
 
   if (!provider) return <p>Loading profile...</p>;
 

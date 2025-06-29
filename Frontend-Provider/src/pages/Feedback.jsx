@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { getFeedbackByProvider } from '../api/feedbackApi';
 
 export default function Feedback() {
   const [feedbackList, setFeedbackList] = useState([]);
-  const providerId = localStorage.getItem('providerId');
 
   useEffect(() => {
-    if (!providerId) return;
-
-    axios.get(`http://localhost:8080/feedback/${providerId}`)
+    getFeedbackByProvider()
       .then(res => setFeedbackList(res.data))
       .catch(err => console.error('Error fetching feedback:', err));
-  }, [providerId]);
+  }, []);
 
   return (
     <div>
