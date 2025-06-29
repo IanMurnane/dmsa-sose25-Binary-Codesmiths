@@ -19,9 +19,10 @@ docker run --name my_pgadmin  --network postgres_network -e PGADMIN_DEFAULT_EMAI
 
 ### Running the Application
 
-To run the project locally:
+Run the project locally. _**(Requires JDK 21)**_
 
 1. Start the **ConfigServer**       
+    - mvn clean install
     - mvn spring-boot:run    
 
     Note: The configuration files are maintained in a separate Git repository. This repository is directly linked to the Config Server used in this project.
