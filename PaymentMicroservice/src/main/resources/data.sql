@@ -1,4 +1,4 @@
-INSERT INTO payment (
+INSERT INTO payments (
     id,
     booking_id,
     amount,

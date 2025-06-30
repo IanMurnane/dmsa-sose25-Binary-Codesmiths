@@ -35,7 +35,6 @@ const Payments = () => {
       {payment && (
         <div style={{ marginTop: '2rem' }}>
           <h3>Payment Details</h3>
-          <p><strong>Payment ID:</strong> {payment.paymentId}</p>
           <p><strong>Booking ID:</strong> {payment.bookingId}</p>
           <p><strong>Amount:</strong> {payment.amount}</p>
           <p><strong>Payment Method:</strong> {payment.paymentMethod}</p>
