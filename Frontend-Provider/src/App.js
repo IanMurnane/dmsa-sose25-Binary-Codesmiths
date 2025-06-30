@@ -5,7 +5,8 @@ import Vehicles from './pages/Vehicles';
 import Bookings from './pages/Bookings';
 import Feedback from './pages/Feedback';
 import Profile from './pages/Profile';
-import ProtectedRoute from './components/ProtectedRoute'; // You'll create this next
+import Payments from './pages/Payments';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         } />
         <Route path="/bookings" element={
           <ProtectedRoute><Bookings /></ProtectedRoute>
+        } />
+        <Route path="/payments" element={
+                  <ProtectedRoute><Payments /></ProtectedRoute>
         } />
         <Route path="/feedback" element={
           <ProtectedRoute><Feedback /></ProtectedRoute>

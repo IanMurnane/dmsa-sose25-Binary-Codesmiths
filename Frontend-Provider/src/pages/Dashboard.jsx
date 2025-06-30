@@ -10,6 +10,7 @@ export default function Dashboard() {
       <p>Welcome! Here you can manage your vehicles and bookings.</p>
       <button onClick={() => navigate('/vehicles')}>Vehicles</button>
       <button onClick={() => navigate('/bookings')}>Bookings</button>
+      <button onClick={() => navigate('/payments')}>Payments</button>
       <button onClick={() => navigate('/feedback')}>Feedback</button>
       <button onClick={() => navigate('/profile')}>Profile</button>
     </div>
