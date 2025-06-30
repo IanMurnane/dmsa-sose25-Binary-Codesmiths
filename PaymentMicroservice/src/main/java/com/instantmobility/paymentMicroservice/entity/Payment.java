@@ -3,6 +3,7 @@ package com.instantmobility.paymentMicroservice.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "payments")
 public class Payment {
 
     @Id
