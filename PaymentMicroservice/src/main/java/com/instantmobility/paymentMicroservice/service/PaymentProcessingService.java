@@ -19,22 +19,21 @@ public class PaymentProcessingService {
 
     public Payment processPayment(PaymentRequest request) {
         Payment payment = new Payment();
-        payment.setId(UUID.randomUUID());
+        payment.setId(UUID.randomUUID().toString());
         payment.setBookingId(request.getBookingId());
         payment.setAmount(request.getAmount());
+        payment.setPaymentMethod(request.getPaymentMethod());
 
-        BillingModel billingModel = new BillingModel();
-        billingModel.setRate(request.getAmount()); // Simplified assumption
-        billingModel.setUnit("flat"); // You can enhance this with per_hour, per_km, etc.
+        BillingModel model = new BillingModel();
+        model.setRate(request.getBillingRate());
+        model.setUnit(request.getBillingUnit());
 
-        payment.setBillingModel(billingModel);
-
+        payment.setBillingModel(model);
         return paymentRepository.save(payment);
     }
 
     public Payment getPaymentByBookingId(String bookingId) {
         Optional<Payment> payment = paymentRepository.findByBookingId(bookingId);
-        return payment.orElseThrow(() ->
-                new PaymentNotFoundException("No payment found for booking ID: " + bookingId));
+        return payment.orElseThrow(() -> new PaymentNotFoundException("Payment not found for bookingId: " + bookingId));
     }
 }

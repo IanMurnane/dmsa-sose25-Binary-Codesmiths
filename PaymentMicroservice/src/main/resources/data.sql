@@ -1,27 +1,24 @@
 INSERT INTO payment (
     id,
     booking_id,
-    user_id,
     amount,
     payment_method,
     billing_unit,
     billing_rate
 ) VALUES
   (
-    '002',
-    1,
-    1,
-    2.50,
+    '1',
+    '1',
+    5.00,
     'credit_card',
     'per_hour',
-    2.50
+    5.00
   ),
   (
-    '001',
-    2,
-    2,
-    4.00,
+    '2',
+    '2',
+    7.50,
     'paypal',
     'per_kilometer',
-    4.00
+    7.50
   );

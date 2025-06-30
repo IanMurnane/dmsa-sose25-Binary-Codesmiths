@@ -2,24 +2,22 @@ package com.instantmobility.paymentMicroservice.dto;
 
 public class PaymentDTO {
     private String paymentId;
-    private int bookingId;
-    private int userId;
+    private String bookingId;
     private double amount;
     private String paymentMethod;
-    private String billingUnit;
     private double billingRate;
+    private String billingUnit;
 
     public PaymentDTO() {}
 
-    public PaymentDTO(String paymentId, int bookingId, int userId, double amount,
-                      String paymentMethod, String billingUnit, double billingRate) {
+    public PaymentDTO(String paymentId, String bookingId, double amount,
+                      String paymentMethod, double billingRate, String billingUnit) {
         this.paymentId = paymentId;
         this.bookingId = bookingId;
-        this.userId = userId;
         this.amount = amount;
         this.paymentMethod = paymentMethod;
-        this.billingUnit = billingUnit;
         this.billingRate = billingRate;
+        this.billingUnit = billingUnit;
     }
 
     public String getPaymentId() {
@@ -30,20 +28,12 @@ public class PaymentDTO {
         this.paymentId = paymentId;
     }
 
-    public int getBookingId() {
+    public String getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(int bookingId) {
+    public void setBookingId(String bookingId) {
         this.bookingId = bookingId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public double getAmount() {
@@ -62,19 +52,19 @@ public class PaymentDTO {
         this.paymentMethod = paymentMethod;
     }
 
-    public String getBillingUnit() {
-        return billingUnit;
-    }
-
-    public void setBillingUnit(String billingUnit) {
-        this.billingUnit = billingUnit;
-    }
-
     public double getBillingRate() {
         return billingRate;
     }
 
     public void setBillingRate(double billingRate) {
         this.billingRate = billingRate;
+    }
+
+    public String getBillingUnit() {
+        return billingUnit;
+    }
+
+    public void setBillingUnit(String billingUnit) {
+        this.billingUnit = billingUnit;
     }
 }

@@ -1,19 +1,15 @@
 package com.instantmobility.paymentMicroservice.entity;
 
 import jakarta.persistence.*;
-import java.util.UUID;
 
 @Entity
 public class Payment {
 
     @Id
-    private UUID id;
+    private String id;
 
     @Column(name = "booking_id")
-    private int bookingId;
-
-    @Column(name = "user_id")
-    private int userId;
+    private String bookingId;
 
     private double amount;
 
@@ -23,28 +19,20 @@ public class Payment {
     @Embedded
     private BillingModel billingModel;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getBookingId() {
+    public String getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(int bookingId) {
+    public void setBookingId(String bookingId) {
         this.bookingId = bookingId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public double getAmount() {
