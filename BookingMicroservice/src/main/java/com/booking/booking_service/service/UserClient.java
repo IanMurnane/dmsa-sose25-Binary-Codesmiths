@@ -7,6 +7,7 @@ import com.booking.booking_service.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 import java.util.Map;
 
@@ -21,4 +22,7 @@ public interface UserClient {
 
     @GetMapping("/users/{id}")
     ResponseEntity<User> getUser(@PathVariable("id") Long id);
+
+    @GetMapping("/users")
+    ResponseEntity<List<User>> getUser();
 }

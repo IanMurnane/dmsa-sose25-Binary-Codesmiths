@@ -105,4 +105,9 @@ public class BookingController {
     public ResponseEntity<User> getUser(@PathVariable Long id) {
         return userClient.getUser(id);
     }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        return userClient.getUser();
+    }
 }
