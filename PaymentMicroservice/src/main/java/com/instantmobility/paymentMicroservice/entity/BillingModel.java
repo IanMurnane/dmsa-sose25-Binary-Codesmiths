@@ -1,11 +1,15 @@
 package com.instantmobility.paymentMicroservice.entity;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Column;
 
 @Embeddable
 public class BillingModel {
 
+    @Column(name = "billing_rate")
     private double rate;
+
+    @Column(name = "billing_unit")
     private String unit;
 
     public double getRate() {
