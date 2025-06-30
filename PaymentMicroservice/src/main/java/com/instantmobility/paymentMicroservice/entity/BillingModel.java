@@ -1,24 +1,30 @@
 package com.instantmobility.paymentMicroservice.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class BillingModel {
 
-    private String unit; // e.g., per_hour, per_km
-    private Double rate;
+    @Column(name = "billing_unit")
+    private String unit;
 
-    // Constructors
-    public BillingModel() {}
+    @Column(name = "billing_rate")
+    private double rate;
 
-    public BillingModel(String unit, Double rate) {
-        this.unit = unit;
-        this.rate = rate;
+    public String getUnit() {
+        return unit;
     }
 
-    // Getters and Setters
-    public String getUnit() { return unit; }
-    public void setUnit(String unit) { this.unit = unit; }
-    public Double getRate() { return rate; }
-    public void setRate(Double rate) { this.rate = rate; }
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
 }

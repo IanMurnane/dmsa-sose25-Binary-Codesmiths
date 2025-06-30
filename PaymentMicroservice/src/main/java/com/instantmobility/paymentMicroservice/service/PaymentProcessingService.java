@@ -1,39 +1,40 @@
 package com.instantmobility.paymentMicroservice.service;
 
+import com.instantmobility.paymentMicroservice.dto.PaymentRequest;
 import com.instantmobility.paymentMicroservice.entity.BillingModel;
 import com.instantmobility.paymentMicroservice.entity.Payment;
+import com.instantmobility.paymentMicroservice.exception.PaymentNotFoundException;
 import com.instantmobility.paymentMicroservice.repository.PaymentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class PaymentProcessingService {
 
-    private final PaymentRepository paymentRepository;
+    @Autowired
+    private PaymentRepository paymentRepository;
 
-    public PaymentProcessingService(PaymentRepository paymentRepository) {
-        this.paymentRepository = paymentRepository;
-    }
+    public Payment processPayment(PaymentRequest request) {
+        Payment payment = new Payment();
+        payment.setId(UUID.randomUUID());
+        payment.setBookingId(request.getBookingId());
+        payment.setAmount(request.getAmount());
 
-    public Payment processPayment(Long bookingId, Long userId, Double amount, String paymentMethod, String billingUnit, Double billingRate) {
-        // Mock validation: Assume bookingId and userId are valid for Task 1
-        if (bookingId == null || userId == null || amount <= 0 || paymentMethod == null || billingUnit == null || billingRate <= 0) {
-            throw new IllegalArgumentException("Invalid payment details");
-        }
+        BillingModel billingModel = new BillingModel();
+        billingModel.setRate(request.getAmount()); // Simplified assumption
+        billingModel.setUnit("flat"); // You can enhance this with per_hour, per_km, etc.
 
-        BillingModel billingModel = new BillingModel(billingUnit, billingRate);
-        Payment payment = new Payment(bookingId, userId, amount, billingModel, paymentMethod, LocalDateTime.now());
+        payment.setBillingModel(billingModel);
+
         return paymentRepository.save(payment);
     }
 
-    public Payment getPayment(Long id) {
-        return paymentRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Payment not found with ID: " + id));
-    }
-
-    public List<Payment> getAllPayments() {
-        return paymentRepository.findAll();
+    public Payment getPaymentByBookingId(String bookingId) {
+        Optional<Payment> payment = paymentRepository.findByBookingId(bookingId);
+        return payment.orElseThrow(() ->
+                new PaymentNotFoundException("No payment found for booking ID: " + bookingId));
     }
 }

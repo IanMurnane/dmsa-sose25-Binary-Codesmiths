@@ -1,12 +1,34 @@
 package com.instantmobility.paymentMicroservice.dto;
 
-public class PaymentRequest {
+public class PaymentDTO {
+    private String paymentId;
     private int bookingId;
     private int userId;
     private double amount;
     private String paymentMethod;
     private String billingUnit;
     private double billingRate;
+
+    public PaymentDTO() {}
+
+    public PaymentDTO(String paymentId, int bookingId, int userId, double amount,
+                      String paymentMethod, String billingUnit, double billingRate) {
+        this.paymentId = paymentId;
+        this.bookingId = bookingId;
+        this.userId = userId;
+        this.amount = amount;
+        this.paymentMethod = paymentMethod;
+        this.billingUnit = billingUnit;
+        this.billingRate = billingRate;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
+    }
 
     public int getBookingId() {
         return bookingId;
