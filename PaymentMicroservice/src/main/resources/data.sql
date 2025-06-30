@@ -1,13 +1,13 @@
 INSERT INTO payments (
     id,
-    booking_id,
+    bookingId,
     amount,
-    payment_method,
-    billing_unit,
-    billing_rate
+    paymentMethod,
+    billingUnit,
+    billingRate
 ) VALUES
   (
-    '1',
+    '100',
     '1',
     5.00,
     'credit_card',
@@ -15,7 +15,7 @@ INSERT INTO payments (
     5.00
   ),
   (
-    '2',
+    '101',
     '2',
     7.50,
     'paypal',

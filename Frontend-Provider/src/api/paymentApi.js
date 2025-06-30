@@ -6,6 +6,6 @@ export const processPayment = async (paymentData) => {
   return BookingAPI.post(`/payments`, paymentData);
 };
 
-export const getPaymentDetails = async (bookingId) => {
-  return BookingAPI.get(`/payments/${bookingId}`);
+export const getPaymentDetails = async (paymentId) => {
+  return BookingAPI.get(`/payments/id/${paymentId}`);
 };

@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class PaymentRequest {
-    private Long bookingId;
-    private Long userId;
+    private String bookingId;
+    private String userId;
     private Double amount;
     private String paymentMethod;
     private String billingUnit;

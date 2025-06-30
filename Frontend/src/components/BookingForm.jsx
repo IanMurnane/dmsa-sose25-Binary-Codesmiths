@@ -89,10 +89,16 @@ const BookingForm = ({ vehicleId, userId, handlePayment, ratingCallback }) => {
                         <td>{formatDate(b.bookingTime)}</td>
                         <td>{b.status}</td>
                         <td>
-                            {b.status === "REQUIRES PAYMENT" && (
+                            {/*{b.status === "REQUIRES PAYMENT" && (*/}
+                            {/*    <button onClick={() => handlePayment(b.id)}>Pay</button>*/}
+                            {/*)}*/}
+                            {/*{b.status === "CONFIRMED" && (*/}
+                            {/*    <button onClick={() => ratingCallback()}>Rate</button>*/}
+                            {/*)}*/}
+                            {b.id % 2 === 1 && (
                                 <button onClick={() => handlePayment(b.id)}>Pay</button>
                             )}
-                            {b.status === "CONFIRMED" && (
+                            {b.id % 2 === 0 && (
                                 <button onClick={() => ratingCallback()}>Rate</button>
                             )}
                         </td>

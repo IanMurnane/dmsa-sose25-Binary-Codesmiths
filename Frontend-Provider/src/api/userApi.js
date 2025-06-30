@@ -11,7 +11,8 @@ export const loginUser = async (credentials) => {
 };
 
 export const getUserProfile = async (userId) => {
-  return BookingAPI.get(`/users/${userId}`);
+  return BookingAPI.get(`/users/1`);
+  // return BookingAPI.get(`/users/${userId}`);
 };
 
 export const updateUserProfile = async (userId, userData) => {

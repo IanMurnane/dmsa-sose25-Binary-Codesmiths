@@ -27,6 +27,12 @@ public class PaymentController {
         return toDTO(payment);
     }
 
+    @GetMapping("/id/{id}")
+    public PaymentDTO getPayment(@PathVariable Long id) {
+        Payment payment = paymentService.getPaymentById(id);
+        return toDTO(payment);
+    }
+
     @GetMapping
     public String index() {
         return "Payment service is running!";
@@ -39,7 +45,10 @@ public class PaymentController {
                 payment.getAmount(),
                 payment.getPaymentMethod(),
                 payment.getBillingModel().getRate(),
-                payment.getBillingModel().getUnit()
+                payment.getBillingModel().getUnit(),
+                payment.getStatus(),
+                payment.getTimestamp(),
+                payment.getUserId()
         );
     }
 }

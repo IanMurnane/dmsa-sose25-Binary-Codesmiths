@@ -6,10 +6,10 @@ import jakarta.persistence.Column;
 @Embeddable
 public class BillingModel {
 
-    @Column(name = "billing_rate")
+    @Column(name = "billingRate")
     private double rate;
 
-    @Column(name = "billing_unit")
+    @Column(name = "billingUnit")
     private String unit;
 
     public double getRate() {

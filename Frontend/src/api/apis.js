@@ -52,7 +52,7 @@ export const deleteBooking = (id) =>
     BookingAPI.delete(`/bookings/${id}`);
 
 // Payments
-export const getPayment = (id) => BookingAPI.get(`/payments/${id}`);
+export const getPayment = (id) => BookingAPI.get(`/payments/id/${id}`);
 export const processPayment = (paymentData) =>
     BookingAPI.post("/payments", paymentData, {
         headers: { "Content-Type": "application/json" },

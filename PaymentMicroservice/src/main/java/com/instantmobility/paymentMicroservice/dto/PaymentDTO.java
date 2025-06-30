@@ -1,31 +1,42 @@
 package com.instantmobility.paymentMicroservice.dto;
 
+import java.time.LocalDateTime;
+
 public class PaymentDTO {
-    private String paymentId;
+    private Long id;
     private String bookingId;
     private double amount;
     private String paymentMethod;
     private double billingRate;
     private String billingUnit;
+    private String status;
+    private LocalDateTime timestamp;
+    private String userId;
 
     public PaymentDTO() {}
 
-    public PaymentDTO(String paymentId, String bookingId, double amount,
-                      String paymentMethod, double billingRate, String billingUnit) {
-        this.paymentId = paymentId;
+    public PaymentDTO(Long id, String bookingId, double amount,
+                      String paymentMethod, double billingRate, String billingUnit,
+                      String status, LocalDateTime timestamp, String userId) {
+        this.id = id;
         this.bookingId = bookingId;
         this.amount = amount;
         this.paymentMethod = paymentMethod;
         this.billingRate = billingRate;
         this.billingUnit = billingUnit;
+        this.status = status;
+        this.timestamp = timestamp;
+        this.userId = userId;
     }
 
-    public String getPaymentId() {
-        return paymentId;
+    // Getters and setters
+
+    public Long getId() {
+        return id;
     }
 
-    public void setPaymentId(String paymentId) {
-        this.paymentId = paymentId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getBookingId() {
@@ -66,5 +77,29 @@ public class PaymentDTO {
 
     public void setBillingUnit(String billingUnit) {
         this.billingUnit = billingUnit;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

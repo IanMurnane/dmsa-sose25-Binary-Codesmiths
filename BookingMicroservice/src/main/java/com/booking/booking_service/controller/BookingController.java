@@ -78,7 +78,7 @@ public class BookingController {
         return paymentClient.processPayment(request);
     }
 
-    @GetMapping("/payments/{id}")
+    @GetMapping("/payments/id/{id}")
     public PaymentDTO getPayment(@PathVariable Long id) {
         return paymentClient.getPayment(id);
     }
@@ -87,6 +87,10 @@ public class BookingController {
     @PostMapping("/ratings")
     public ResponseEntity<?> submitRating(@RequestBody RatingDTO ratingDTO) {
         return ratingClient.createRating(ratingDTO);
+    }
+    @GetMapping("/ratings")
+    public List<RatingDTO> getRatings() {
+        return ratingClient.getRatings();
     }
 
     // Auth Proxy

@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 @Data
 public class PaymentDTO {
     private Long id;
-    private Long bookingId;
-    private Long userId;
+    private String bookingId;
+    private String userId;
     private Double amount;
     private String paymentMethod;
     private String billingUnit;
