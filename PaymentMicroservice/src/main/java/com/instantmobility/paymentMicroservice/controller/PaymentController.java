@@ -1,36 +1,40 @@
 package com.instantmobility.paymentMicroservice.controller;
 
+import com.instantmobility.paymentMicroservice.dto.PaymentDTO;
 import com.instantmobility.paymentMicroservice.dto.PaymentRequest;
 import com.instantmobility.paymentMicroservice.entity.Payment;
 import com.instantmobility.paymentMicroservice.service.PaymentProcessingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/payments")
+@CrossOrigin(origins = "*")
 public class PaymentController {
 
-    private final PaymentProcessingService paymentService;
+    @Autowired
+    private PaymentProcessingService paymentService;
 
-    public PaymentController(PaymentProcessingService paymentService) {
-        this.paymentService = paymentService;
-    }
-
-    // REST API: Process a payment
     @PostMapping
-    public Payment processPayment(@RequestBody PaymentRequest request) {
-        return paymentService.processPayment(
-                request.getBookingId(),
-                request.getUserId(),
-                request.getAmount(),
-                request.getPaymentMethod(),
-                request.getBillingUnit(),
-                request.getBillingRate()
-        );
+    public PaymentDTO processPayment(@RequestBody PaymentRequest request) {
+        Payment payment = paymentService.processPayment(request);
+        return toDTO(payment);
     }
 
-    // REST API: Retrieve payment details
-    @GetMapping("/{id}")
-    public Payment getPayment(@PathVariable Long id) {
-        return paymentService.getPayment(id);
+    @GetMapping("/{bookingId}")
+    public PaymentDTO getPayment(@PathVariable String bookingId) {
+        Payment payment = paymentService.getPaymentByBookingId(bookingId);
+        return toDTO(payment);
+    }
+
+    private PaymentDTO toDTO(Payment payment) {
+        return new PaymentDTO(
+                payment.getId(),
+                payment.getBookingId(),
+                payment.getAmount(),
+                payment.getPaymentMethod(),
+                payment.getBillingModel().getRate(),
+                payment.getBillingModel().getUnit()
+        );
     }
 }

@@ -5,20 +5,22 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class BillingModel {
 
-    private String unit; // e.g., per_hour, per_km
-    private Double rate;
+    private double rate;
+    private String unit;
 
-    // Constructors
-    public BillingModel() {}
+    public double getRate() {
+        return rate;
+    }
 
-    public BillingModel(String unit, Double rate) {
-        this.unit = unit;
+    public void setRate(double rate) {
         this.rate = rate;
     }
 
-    // Getters and Setters
-    public String getUnit() { return unit; }
-    public void setUnit(String unit) { this.unit = unit; }
-    public Double getRate() { return rate; }
-    public void setRate(Double rate) { this.rate = rate; }
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 }
