@@ -28,22 +28,21 @@ export default function Users() {
 
     // Handle form submission
     const handleSubmit = (e) => {
-        debugger
-    e.preventDefault();
+        e.preventDefault();
 
-    registerUser(formData)
-        .then(() => {
-        alert('User added!');
-        setFormData({
-            id: '',
-            email: '',
-            fullName: '',
-            password: '',
-            role: ''
-        });
-    return getUsers();  
-    })
-    .then(res => setUsers(res.data))
+        registerUser(formData)
+            .then(() => {
+            alert('User added!');
+            setFormData({
+                id: '',
+                email: '',
+                fullName: '',
+                password: '',
+                role: ''
+            });
+        return getUsers();
+        })
+        .then(res => setUsers(res.data))
         .catch(err => console.error(err));
     };
 
