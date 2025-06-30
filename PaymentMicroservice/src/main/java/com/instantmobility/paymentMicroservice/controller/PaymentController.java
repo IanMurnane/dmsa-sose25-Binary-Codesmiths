@@ -27,6 +27,11 @@ public class PaymentController {
         return toDTO(payment);
     }
 
+    @GetMapping
+    public String index() {
+        return "Payment service is running!";
+    }
+
     private PaymentDTO toDTO(Payment payment) {
         return new PaymentDTO(
                 payment.getId(),
