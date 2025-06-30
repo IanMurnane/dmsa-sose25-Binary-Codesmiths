@@ -12,7 +12,6 @@ export default function Dashboard() {
       <button onClick={() => navigate('/bookings')}>Bookings</button>
       <button onClick={() => navigate('/payments')}>Payments</button>
       <button onClick={() => navigate('/feedback')}>Feedback</button>
-      {/* <button onClick={() => navigate('/profile')}>Profile</button> */}
       <button onClick={() => navigate('/users')}>Users</button>
     </div>
   );

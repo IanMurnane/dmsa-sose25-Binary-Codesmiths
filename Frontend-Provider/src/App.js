@@ -29,9 +29,6 @@ function App() {
         <Route path="/feedback" element={
           <ProtectedRoute><Feedback /></ProtectedRoute>
         } />
-        <Route path="/profile" element={
-          <ProtectedRoute><Profile /></ProtectedRoute>
-        } />
         <Route path="/users" element={
           <ProtectedRoute><Users /></ProtectedRoute>
         } />
