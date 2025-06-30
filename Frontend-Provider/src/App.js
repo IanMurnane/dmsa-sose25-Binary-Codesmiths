@@ -7,6 +7,7 @@ import Feedback from './pages/Feedback';
 import Profile from './pages/Profile';
 import Payments from './pages/Payments';
 import ProtectedRoute from './components/ProtectedRoute';
+import Users from "./pages/Users";
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
         } />
         <Route path="/profile" element={
           <ProtectedRoute><Profile /></ProtectedRoute>
+        } />
+        <Route path="/users" element={
+          <ProtectedRoute><Users /></ProtectedRoute>
         } />
       </Routes>
     </BrowserRouter>
